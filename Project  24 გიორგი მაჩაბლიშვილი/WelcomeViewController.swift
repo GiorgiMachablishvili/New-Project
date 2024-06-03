@@ -65,7 +65,7 @@ class WelcomeViewController: UIViewController {
     
     private lazy var textField1Image: UIImageView = {
         let imageView = UIImageView(frame: .zero)
-        imageView.image = UIImage(systemName: "envelope")
+        imageView.image = UIImage(named: "mail")
         imageView.tintColor = UIColor(hexString: "868889")
         return imageView
     }()
@@ -81,14 +81,14 @@ class WelcomeViewController: UIViewController {
     
     private lazy var textField2Image1: UIImageView = {
         let imageView = UIImageView(frame: .zero)
-        imageView.image = UIImage(systemName: "lock")
+        imageView.image = UIImage(named: "lock")
         imageView.tintColor = UIColor(hexString: "868889")
         return imageView
     }()
     
     private lazy var textField2Image2: UIImageView = {
         let imageView = UIImageView(frame: .zero)
-        imageView.image = UIImage(systemName: "eye")
+        imageView.image = UIImage(named: "eye")
         imageView.tintColor = UIColor(hexString: "868889")
         return imageView
     }()
@@ -96,7 +96,7 @@ class WelcomeViewController: UIViewController {
     private lazy var switcherLabel: UIImageView = {
         let label = UIImageView(frame: .zero)
         label.tintColor = UIColor(hexString: "868889")
-        label.image = UIImage(systemName: "switch.2")
+        label.image = UIImage(named: "swicher")
         return label
     }()
     
