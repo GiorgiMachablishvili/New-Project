@@ -16,6 +16,7 @@ struct ProductList {
     let price: String
     let name: String
     let quantity: String
+    let lineImage : UIImage
     let bagImage: UIImage
 }
 
@@ -34,28 +35,29 @@ class ChooseItemsViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        layout.minimumLineSpacing = 10
+        layout.minimumLineSpacing = 20
         layout.minimumInteritemSpacing = 10
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = UIColor(hexString: "FFFFFF")
         return collectionView
     }()
     
     //MARK: product array
     let products: [ProductList] = [
-        ProductList(imageName: UIImage.peachImage(), backImageName: UIImage.peachBackImage(), heartImage: UIImage.blackHeart, saleImage: UIImage.white, price: "$8.00", name: "Fresh Peach", quantity: "dozen", bagImage: UIImage(named: "bagImage")!),
-        ProductList(imageName: UIImage.avocadoImage(), backImageName: UIImage.avocadoBackImage(), heartImage: UIImage.blackHeart, saleImage: UIImage.newSale, price: "$7.00", name: "Avacoda", quantity: "2.0 lbs", bagImage: UIImage(named: "bagImage")!),
-        ProductList(imageName: UIImage.pineappleImage(), backImageName: UIImage.pineappleBackImage(), heartImage: UIImage.redHeart, saleImage: UIImage.white, price: "$9.90", name: "Pineapple", quantity: "1.50 lbs", bagImage: UIImage(named: "bagImage")!),
-        ProductList(imageName: UIImage.grapesImage(), backImageName: UIImage.grapesBackImage(), heartImage: UIImage.blackHeart, saleImage: UIImage.onsale16, price: "$7.05", name: "Black Grapes", quantity: "5.0 lbs", bagImage: UIImage(named: "bagImage")!),
-        ProductList(imageName: UIImage.pomegranateImage(), backImageName: UIImage.pomegranateBackImage(), heartImage: UIImage.blackHeart, saleImage: UIImage.newSale, price: "$2.09", name: "Pomegranate", quantity: "1.50 lbs", bagImage: UIImage(named: "bagImage")!),
-        ProductList(imageName: UIImage.broccoliImage(), backImageName: UIImage.brocolBackImage(), heartImage: UIImage.redHeart, saleImage: UIImage.white, price: "$3.00", name: "Fresh B roccoli", quantity: "1 kg", bagImage: UIImage(named: "bagImage")!)
-        
+        ProductList(imageName: UIImage.peachImage(), backImageName: UIImage.peachBackImage(), heartImage: UIImage.blackHeart, saleImage: UIImage.white, price: "$8.00", name: "Fresh Peach", quantity: "dozen", lineImage: UIImage.line, bagImage: UIImage(named: "bagImage")!),
+        ProductList(imageName: UIImage.avocadoImage(), backImageName: UIImage.avocadoBackImage(), heartImage: UIImage.blackHeart, saleImage: UIImage.newSale, price: "$7.00", name: "Avacoda", quantity: "2.0 lbs", lineImage: UIImage.line, bagImage: UIImage(named: "bagImage")!),
+        ProductList(imageName: UIImage.pineappleImage(), backImageName: UIImage.pineappleBackImage(), heartImage: UIImage.redHeart, saleImage: UIImage.white, price: "$9.90", name: "Pineapple", quantity: "1.50 lbs", lineImage: UIImage.line, bagImage: UIImage(named: "bagImage")!),
+        ProductList(imageName: UIImage.grapesImage(), backImageName: UIImage.grapesBackImage(), heartImage: UIImage.blackHeart, saleImage: UIImage.onsale16, price: "$7.05", name: "Black Grapes", quantity: "5.0 lbs", lineImage: UIImage.line, bagImage: UIImage(named: "bagImage")!),
+        ProductList(imageName: UIImage.pomegranateImage(), backImageName: UIImage.pomegranateBackImage(), heartImage: UIImage.blackHeart, saleImage: UIImage.newSale, price: "$2.09", name: "Pomegranate", quantity: "1.50 lbs", lineImage: UIImage.line, bagImage: UIImage(named: "bagImage")!),
+        ProductList(imageName: UIImage.broccoliImage(), backImageName: UIImage.brocolBackImage(), heartImage: UIImage.redHeart, saleImage: UIImage.white, price: "$3.00", name: "Fresh B roccoli", quantity: "1 kg", lineImage: UIImage.line, bagImage: UIImage(named: "bagImage")!)
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor(hexString: "FFFFFF")
+        self.view.backgroundColor = UIColor(hexString: "F4F5F9")
         
         collectionView.dataSource = self
         collectionView.delegate = self

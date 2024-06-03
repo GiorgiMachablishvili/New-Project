@@ -60,6 +60,13 @@ class ProductCell: UICollectionViewCell {
         return label
     }()
     
+    private lazy var line : UIImageView = {
+        let imageView = UIImageView(frame: .zero)
+        imageView.tintColor = UIColor(hexString: "F4F5F9")
+        imageView.image = UIImage(named: "line")
+        return imageView
+    }()
+    
     private lazy var bagImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
 //        imageView.contentMode = .scaleAspectFit
@@ -78,7 +85,6 @@ class ProductCell: UICollectionViewCell {
         let stackView = UIStackView(frame: .zero)
         stackView.axis = .horizontal
         stackView.spacing = 9
-//        stackView.distribution = .fillEqually
         return stackView
     }()
     
@@ -103,6 +109,7 @@ class ProductCell: UICollectionViewCell {
         contentView.addSubview(itemNameLabel)
         contentView.addSubview(itemWeightLabel)
         contentView.addSubview(stackView)
+        contentView.addSubview(line)
         stackView.addSubview(bagImageView)
         stackView.addSubview(addCartButtonItem)
     }
@@ -116,6 +123,7 @@ class ProductCell: UICollectionViewCell {
         itemNameLabel.translatesAutoresizingMaskIntoConstraints = false
         itemWeightLabel.translatesAutoresizingMaskIntoConstraints = false
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        line.translatesAutoresizingMaskIntoConstraints = false
         bagImageView.translatesAutoresizingMaskIntoConstraints = false
         addCartButtonItem.translatesAutoresizingMaskIntoConstraints = false
         
@@ -148,13 +156,13 @@ class ProductCell: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            priceLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
+            priceLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 3),
             priceLabel.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
             priceLabel.heightAnchor.constraint(equalToConstant: 18)
         ])
         
         NSLayoutConstraint.activate([
-            itemNameLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 17),
+            itemNameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
             itemNameLabel.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
             itemNameLabel.heightAnchor.constraint(equalToConstant: 23)
         ])
@@ -166,8 +174,15 @@ class ProductCell: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
+            line.topAnchor.constraint(equalTo: itemWeightLabel.bottomAnchor, constant: 11),
+            line.centerXAnchor.constraint(equalTo: itemWeightLabel.centerXAnchor),
+            line.widthAnchor.constraint(equalToConstant: 171),
+            line.heightAnchor.constraint(equalToConstant: 1)
+        ])
+        
+        NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: itemNameLabel.centerXAnchor),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -11),
+            stackView.topAnchor.constraint(equalTo: line.bottomAnchor, constant: 12),
             stackView.widthAnchor.constraint(equalToConstant: 90),
             stackView.heightAnchor.constraint(equalToConstant: 18)
         ])

@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol ProductInfo: AnyObject {
-    func productInfo(_ backImage: UIImage, _ mainImage: UIImage, _ price: String, _ title: String, _ itemWeight: String)
-}
-
 class CheckoutViewController: UIViewController {
     private lazy var topView: UIView = {
         let view = UIView(frame: .zero)
@@ -26,28 +22,6 @@ class CheckoutViewController: UIViewController {
         label.text = "Shopping Cart"
         label.numberOfLines = 1
         return label
-    }()
-    
-    private lazy var plusButton: UIButton = {
-        let button = UIButton(frame: .zero)
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.tintColor = UIColor(hexString: "6CC51D")
-        return button
-    }()
-    
-    private lazy var itemCountLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.textColor = UIColor(hexString: "868889")
-        label.font = .poppinsRegular(size: 15)
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private lazy var minusButton: UIButton = {
-        let button = UIButton(frame: .zero)
-        button.setImage(UIImage(systemName: "minus"), for: .normal)
-        button.tintColor = UIColor(hexString: "6CC51D")
-        return button
     }()
     
     private lazy var bottomView: UIView = {
@@ -70,7 +44,7 @@ class CheckoutViewController: UIViewController {
         let label = UILabel(frame: .zero)
         label.textColor = UIColor(hexString: "868889")
         label.font = .poppinsRegular(size: 12)
-        label.text = "$"
+        label.text = "56.7"
         label.textAlignment = .right
         label.numberOfLines = 1
         return label
@@ -90,7 +64,7 @@ class CheckoutViewController: UIViewController {
         let label = UILabel(frame: .zero)
         label.textColor = UIColor(hexString: "868889")
         label.font = .poppinsRegular(size: 12)
-        label.text = "$"
+        label.text = "$1.6"
         label.textAlignment = .right
         label.numberOfLines = 1
         return label
@@ -110,7 +84,7 @@ class CheckoutViewController: UIViewController {
         let label = UILabel(frame: .zero)
         label.textColor = UIColor(hexString: "000000")
         label.font = .poppinsSemiBold(size: 18)
-        label.text = "$"
+        label.text = "$58.2"
         label.textAlignment = .right
         label.numberOfLines = 1
         return label
@@ -128,21 +102,29 @@ class CheckoutViewController: UIViewController {
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.backgroundColor = UIColor(hexString: "F4F5F9")
+        tableView.showsVerticalScrollIndicator = false
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(ProductViewCell.self, forCellReuseIdentifier: "ProductViewCell")
         return tableView
     }()
     
-    private var productList: [ProductList] = []
-    
-    var delegate: ProductList?
+    private var productList: [ProductList] = [
+        ProductList(imageName: UIImage.peachImage(), backImageName: UIImage.peachBackImage(), heartImage: UIImage.blackHeart, saleImage: UIImage.white, price: "$8.00", name: "Fresh Peach", quantity: "dozen", lineImage: UIImage.line, bagImage: UIImage(named: "bagImage")!),
+        ProductList(imageName: UIImage.avocadoImage(), backImageName: UIImage.avocadoBackImage(), heartImage: UIImage.blackHeart, saleImage: UIImage.newSale, price: "$7.00", name: "Avacoda", quantity: "2.0 lbs", lineImage: UIImage.line, bagImage: UIImage(named: "bagImage")!),
+        ProductList(imageName: UIImage.pineappleImage(), backImageName: UIImage.pineappleBackImage(), heartImage: UIImage.redHeart, saleImage: UIImage.white, price: "$9.90", name: "Pineapple", quantity: "1.50 lbs", lineImage: UIImage.line, bagImage: UIImage(named: "bagImage")!),
+        ProductList(imageName: UIImage.grapesImage(), backImageName: UIImage.grapesBackImage(), heartImage: UIImage.blackHeart, saleImage: UIImage.onsale16, price: "$7.05", name: "Black Grapes", quantity: "5.0 lbs", lineImage: UIImage.line, bagImage: UIImage(named: "bagImage")!),
+        ProductList(imageName: UIImage.pomegranateImage(), backImageName: UIImage.pomegranateBackImage(), heartImage: UIImage.blackHeart, saleImage: UIImage.newSale, price: "$2.09", name: "Pomegranate", quantity: "1.50 lbs", lineImage: UIImage.line, bagImage: UIImage(named: "bagImage")!),
+        ProductList(imageName: UIImage.broccoliImage(), backImageName: UIImage.brocolBackImage(), heartImage: UIImage.redHeart, saleImage: UIImage.white, price: "$3.00", name: "Fresh B roccoli", quantity: "1 kg", lineImage: UIImage.line, bagImage: UIImage(named: "bagImage")!)
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         setupConstraint()
+        
+        self.view.backgroundColor = UIColor(hexString: "F4F5F9")
     }
     
     //MARK: back to next page
@@ -152,12 +134,10 @@ class CheckoutViewController: UIViewController {
     
     //MARK: setup ui components
     func setup() {
+        view.addSubview(tableView)
         view.addSubview(topView)
         topView.addSubview(titleLabel)
         view.addSubview(bottomView)
-        tableView.addSubview(plusButton)
-        tableView.addSubview(itemCountLabel)
-        tableView.addSubview(minusButton)
         bottomView.addSubview(subTotalLabel)
         bottomView.addSubview(subTotalPriceLabel)
         bottomView.addSubview(shippingLabel)
@@ -170,7 +150,7 @@ class CheckoutViewController: UIViewController {
     
     //MARK: setup ui components constraints
     func setupConstraint() {
-        //        view.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         topView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         bottomView.translatesAutoresizingMaskIntoConstraints = false
@@ -181,11 +161,15 @@ class CheckoutViewController: UIViewController {
         totalLabel.translatesAutoresizingMaskIntoConstraints = false
         totalPriceLabel.translatesAutoresizingMaskIntoConstraints = false
         checkButton.translatesAutoresizingMaskIntoConstraints = false
-        plusButton.translatesAutoresizingMaskIntoConstraints = false
-        itemCountLabel.translatesAutoresizingMaskIntoConstraints = false
-        minusButton.translatesAutoresizingMaskIntoConstraints = false
         
         //MARK: layout constraints
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 118),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 17),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -17),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -234)
+        ])
+        
         NSLayoutConstraint.activate([
             topView.topAnchor.constraint(equalTo: view.topAnchor),
             topView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -197,27 +181,6 @@ class CheckoutViewController: UIViewController {
             titleLabel.topAnchor.constraint(equalTo: topView.topAnchor,constant: 62),
             titleLabel.centerXAnchor.constraint(equalTo: topView.centerXAnchor),
             titleLabel.heightAnchor.constraint(equalToConstant: 27)
-        ])
-        
-        NSLayoutConstraint.activate([
-            plusButton.topAnchor.constraint(equalTo: tableView.topAnchor,constant: 16),
-            plusButton.trailingAnchor.constraint(equalTo: tableView.trailingAnchor, constant: -19.17),
-            plusButton.heightAnchor.constraint(equalToConstant: 11.85),
-            plusButton.widthAnchor.constraint(equalToConstant: 12.83)
-        ])
-        
-        NSLayoutConstraint.activate([
-            itemCountLabel.topAnchor.constraint(equalTo: plusButton.topAnchor,constant: 16.15),
-            itemCountLabel.centerXAnchor.constraint(equalTo: plusButton.centerXAnchor),
-            itemCountLabel.heightAnchor.constraint(equalToConstant: 23),
-            itemCountLabel.widthAnchor.constraint(equalToConstant: 10)
-        ])
-        
-        NSLayoutConstraint.activate([
-            minusButton.topAnchor.constraint(equalTo: itemCountLabel.topAnchor,constant: 17),
-            minusButton.centerXAnchor.constraint(equalTo: plusButton.centerXAnchor),
-            minusButton.heightAnchor.constraint(equalToConstant: 0),
-            minusButton.widthAnchor.constraint(equalToConstant: 12.83)
         ])
         
         NSLayoutConstraint.activate([
@@ -274,7 +237,7 @@ class CheckoutViewController: UIViewController {
 
 extension CheckoutViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        50
+        100
     }
 }
 
@@ -284,11 +247,13 @@ extension CheckoutViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ProductViewCell", for: indexPath) as! ProductViewCell
-        if let product = delegate {
-            cell.configure(with: product)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductViewCell", for: indexPath) as? ProductViewCell else {
+            return UITableViewCell()
         }
+        let product = productList[indexPath.item]
+            cell.configure(with: product)
         return cell
     }
 }
  
+
