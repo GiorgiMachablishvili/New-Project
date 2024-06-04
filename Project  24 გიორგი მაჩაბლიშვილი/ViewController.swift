@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     private lazy var customView: UIImageView = {
         let view = UIImageView(frame: .zero)
         view.image = UIImage(named: "bottomView")
+        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -71,6 +72,12 @@ class ViewController: UIViewController {
         setupConstraints()
     }
     
+    //MARK: primary button action
+    @objc func addCutomButton() {
+        let welcomeVC = WelcomeViewController()
+        navigationController?.pushViewController(welcomeVC, animated: true)
+    }
+    
     //MARK: setup ui components
     private func setup() {
         view.addSubview(imageView)
@@ -116,11 +123,6 @@ class ViewController: UIViewController {
             make.height.equalTo(60)
         }
     }
-    
-    //MARK: primary button action
-    @objc func addCutomButton() {
-        let welcomeVC = WelcomeViewController()
-        navigationController?.pushViewController(welcomeVC, animated: true)
-    }
 }
+
 

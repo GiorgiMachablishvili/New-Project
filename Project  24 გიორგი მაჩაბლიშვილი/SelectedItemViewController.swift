@@ -16,6 +16,7 @@ class SelectedItemViewController: UIViewController {
         button.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         button.tintColor = UIColor(hexString: "000000")
         button.addTarget(self, action: #selector(goBackPage), for: .touchUpInside)
+        view.isUserInteractionEnabled = true
         return button
     }()
     
