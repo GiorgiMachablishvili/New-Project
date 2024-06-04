@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class CheckoutViewController: UIViewController {
     private lazy var topView: UIView = {
@@ -129,7 +130,7 @@ class CheckoutViewController: UIViewController {
     
     //MARK: back to next page
     @objc func goBack() {
-        navigationController?.popViewController(animated: true)
+        navigationController?.dismiss(animated: true)
     }
     
     //MARK: setup ui components
@@ -148,96 +149,79 @@ class CheckoutViewController: UIViewController {
         
     }
     
-    //MARK: setup ui components constraints
+    //MARK: layout constraints
     func setupConstraint() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        topView.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        bottomView.translatesAutoresizingMaskIntoConstraints = false
-        subTotalLabel.translatesAutoresizingMaskIntoConstraints = false
-        subTotalPriceLabel.translatesAutoresizingMaskIntoConstraints = false
-        shippingLabel.translatesAutoresizingMaskIntoConstraints = false
-        shippingPriceLabel.translatesAutoresizingMaskIntoConstraints = false
-        totalLabel.translatesAutoresizingMaskIntoConstraints = false
-        totalPriceLabel.translatesAutoresizingMaskIntoConstraints = false
-        checkButton.translatesAutoresizingMaskIntoConstraints = false
+        tableView.snp.remakeConstraints { make in
+            make.top.equalTo(view.snp.top).offset(118)
+            make.leading.equalTo(view.snp.leading).offset(17)
+            make.trailing.equalTo(view.snp.trailing).offset(-17)
+            make.bottom.equalTo(view.snp.bottom).offset(-234)
+        }
         
-        //MARK: layout constraints
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 118),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 17),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -17),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -234)
-        ])
+        topView.snp.remakeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(118)
+        }
         
-        NSLayoutConstraint.activate([
-            topView.topAnchor.constraint(equalTo: view.topAnchor),
-            topView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            topView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            topView.heightAnchor.constraint(equalToConstant: 118)
-        ])
+        titleLabel.snp.remakeConstraints { make in
+            make.top.equalTo(topView.snp.top).offset(62)
+            make.centerX.equalTo(topView.snp.centerX)
+            make.height.equalTo(27)
+        }
         
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topView.topAnchor,constant: 62),
-            titleLabel.centerXAnchor.constraint(equalTo: topView.centerXAnchor),
-            titleLabel.heightAnchor.constraint(equalToConstant: 27)
-        ])
+        bottomView.snp.remakeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(234)
+        }
         
-        NSLayoutConstraint.activate([
-            bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            bottomView.heightAnchor.constraint(equalToConstant: 234)
-        ])
+        subTotalLabel.snp.remakeConstraints { make in
+            make.top.equalTo(bottomView.snp.top).offset(22)
+            make.leading.equalTo(bottomView.snp.leading).offset(17)
+            make.height.equalTo(18)
+        }
         
-        NSLayoutConstraint.activate([
-            subTotalLabel.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 22),
-            subTotalLabel.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 17),
-            subTotalLabel.heightAnchor.constraint(equalToConstant: 18)
-        ])
+        subTotalPriceLabel.snp.remakeConstraints { make in
+            make.top.equalTo(bottomView.snp.top).offset(22)
+            make.trailing.equalTo(bottomView.snp.trailing).offset(-17)
+            make.height.equalTo(18)
+        }
         
-        NSLayoutConstraint.activate([
-            subTotalPriceLabel.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 22),
-            subTotalPriceLabel.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -17),
-            subTotalPriceLabel.heightAnchor.constraint(equalToConstant: 18)
-        ])
+        shippingLabel.snp.remakeConstraints { make in
+            make.top.equalTo(subTotalLabel.snp.bottom).offset(7)
+            make.leading.equalTo(bottomView.snp.leading).offset(17)
+            make.height.equalTo(18)
+        }
         
-        NSLayoutConstraint.activate([
-            shippingLabel.topAnchor.constraint(equalTo: subTotalLabel.bottomAnchor, constant: 7),
-            shippingLabel.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 17),
-            shippingLabel.heightAnchor.constraint(equalToConstant: 18)
-        ])
+        shippingPriceLabel.snp.remakeConstraints { make in
+            make.top.equalTo(subTotalPriceLabel.snp.bottom).offset(7)
+            make.trailing.equalTo(bottomView.snp.trailing).offset(-17)
+            make.height.equalTo(18)
+        }
         
-        NSLayoutConstraint.activate([
-            shippingPriceLabel.topAnchor.constraint(equalTo: subTotalPriceLabel.bottomAnchor, constant: 7),
-            shippingPriceLabel.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -17),
-            shippingPriceLabel.heightAnchor.constraint(equalToConstant: 18)
-        ])
+        totalLabel.snp.remakeConstraints { make in
+            make.top.equalTo(shippingLabel.snp.bottom).offset(30)
+            make.leading.equalTo(bottomView.snp.leading).offset(17)
+            make.height.equalTo(27)
+        }
         
-        NSLayoutConstraint.activate([
-            totalLabel.topAnchor.constraint(equalTo: shippingLabel.bottomAnchor, constant: 30),
-            totalLabel.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 17),
-            totalLabel.heightAnchor.constraint(equalToConstant: 27)
-        ])
+        totalPriceLabel.snp.remakeConstraints { make in
+            make.top.equalTo(shippingPriceLabel.snp.bottom).offset(30)
+            make.trailing.equalTo(bottomView.snp.trailing).offset(-17)
+            make.height.equalTo(27)
+        }
         
-        NSLayoutConstraint.activate([
-            totalPriceLabel.topAnchor.constraint(equalTo: shippingPriceLabel.bottomAnchor, constant: 30),
-            totalPriceLabel.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -17),
-            totalPriceLabel.heightAnchor.constraint(equalToConstant: 27)
-        ])
-        
-        NSLayoutConstraint.activate([
-            checkButton.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 17),
-            checkButton.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -17),
-            checkButton.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor, constant: -36),
-            checkButton.heightAnchor.constraint(equalToConstant: 60)
-        ])
+        checkButton.snp.remakeConstraints { make in
+            make.leading.equalTo(bottomView.snp.leading).offset(17)
+            make.trailing.equalTo(bottomView.snp.trailing).offset(-17)
+            make.bottom.equalTo(bottomView.snp.bottom).offset(-36)
+            make.height.equalTo(60)
+        }
     }
 }
 
 extension CheckoutViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        100
+        110
     }
 }
 
@@ -251,9 +235,9 @@ extension CheckoutViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let product = productList[indexPath.item]
-            cell.configure(with: product)
+        cell.configure(with: product)
         return cell
     }
 }
- 
+
 

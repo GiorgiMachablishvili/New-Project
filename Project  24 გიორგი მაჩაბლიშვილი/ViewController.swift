@@ -7,6 +7,7 @@
 
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
     //MARK: -UI components
@@ -18,12 +19,13 @@ class ViewController: UIViewController {
         return imageView
     }()
     
-    private lazy var customView: UIView = {
-        let view = UIView(frame: .zero)
-        view.backgroundColor = UIColor(hexString: "FFFFFF")
-        
+    private lazy var customView: UIImageView = {
+        let view = UIImageView(frame: .zero)
+        view.image = UIImage(named: "bottomView")
         return view
     }()
+    
+    
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
@@ -58,7 +60,6 @@ class ViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        customView.roundTopCorners(radius: 50)
     }
     
     override func viewDidLoad() {
@@ -81,48 +82,39 @@ class ViewController: UIViewController {
     
     //MARK: setup ui components constraints
     private func setupConstraints() {
-        //MARK: turn off auto layouts
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        customView.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        paragraphLabel.translatesAutoresizingMaskIntoConstraints = false
-        primaryButton.translatesAutoresizingMaskIntoConstraints = false
-        
         //MARK: layout constraints
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -282)
-        ])
+        imageView.snp.remakeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(619)
+        }
         
-        NSLayoutConstraint.activate([
-            customView.topAnchor.constraint(equalTo: view.topAnchor, constant: 471.74),
-            customView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            customView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            customView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
-        ])
+        customView.snp.remakeConstraints { make in
+            make.top.equalTo(view.snp.top).offset(471)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
         
-        NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: customView.topAnchor, constant: 46.26),
-            titleLabel.leadingAnchor.constraint(equalTo: customView.leadingAnchor, constant: 47.1),
-            titleLabel.trailingAnchor.constraint(equalTo: customView.trailingAnchor, constant: -47),
-            titleLabel.heightAnchor.constraint(equalToConstant: 90)
-        ])
+        titleLabel.snp.remakeConstraints { make in
+            make.top.equalTo(customView.snp.top).offset(46.26)
+            make.leading.equalTo(customView.snp.leading).offset(47)
+            make.trailing.equalTo(customView.snp.trailing).offset(-47)
+            make.height.equalTo(90)
+        }
         
-        NSLayoutConstraint.activate([
-            paragraphLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 17),
-            paragraphLabel.leadingAnchor.constraint(equalTo: customView.leadingAnchor, constant: 47.1),
-            paragraphLabel.trailingAnchor.constraint(equalTo: customView.trailingAnchor, constant: -47),
-            paragraphLabel.heightAnchor.constraint(equalToConstant: 46)
-        ])
+        paragraphLabel.snp.remakeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(17)
+            make.leading.equalTo(customView.snp.leading).offset(47)
+            make.trailing.equalTo(customView.snp.trailing).offset(-47)
+            make.height.equalTo(47)
+        }
         
-        NSLayoutConstraint.activate([
-            primaryButton.topAnchor.constraint(equalTo: paragraphLabel.bottomAnchor, constant: 91.74),
-            primaryButton.leadingAnchor.constraint(equalTo: customView.leadingAnchor, constant: 17.1),
-            primaryButton.trailingAnchor.constraint(equalTo: customView.trailingAnchor, constant: -17),
-            primaryButton.heightAnchor.constraint(equalToConstant: 60)
-        ])
+        primaryButton.snp.remakeConstraints { make in
+            make.top.equalTo(paragraphLabel.snp.bottom).offset(91)
+            make.leading.equalTo(customView.snp.leading).offset(17)
+            make.trailing.equalTo(customView.snp.trailing).offset(-17)
+            make.height.equalTo(60)
+        }
     }
     
     //MARK: primary button action
@@ -132,14 +124,3 @@ class ViewController: UIViewController {
     }
 }
 
-//MARK: view corner radius extension
-extension UIView {
-    func roundTopCorners(radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: bounds,
-                                byRoundingCorners: [.topLeft, .topRight],
-                                cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        layer.mask = mask
-    }
-}

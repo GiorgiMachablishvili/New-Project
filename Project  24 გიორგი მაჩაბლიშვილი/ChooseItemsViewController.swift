@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 //MARK: product list struct
 struct ProductList {
@@ -76,22 +77,21 @@ class ChooseItemsViewController: UIViewController {
     
     //MARK: setup ui components constraints
     func setupConstraints() {
-        topLabel.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-
         //MARK: layout constraints
-        NSLayoutConstraint.activate([
-            topLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 45),
-            topLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 17),
-            topLabel.heightAnchor.constraint(equalToConstant: 27)
-        ])
         
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 93),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 17),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        
+        topLabel.snp.remakeConstraints { make in
+            make.top.equalTo(view.snp.top).offset(45)
+            make.leading.equalTo(view.snp.leading).offset(17)
+            make.height.equalTo(27)
+        }
+        
+        collectionView.snp.remakeConstraints { make in
+            make.top.equalTo(view.snp.top).offset(93)
+            make.leading.equalTo(view.snp.leading).offset(17)
+            make.trailing.equalTo(view.snp.trailing).offset(-16)
+            make.bottom.equalTo(view.snp.bottom)
+        }
     }
 }
 
@@ -117,8 +117,9 @@ extension ChooseItemsViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedProduct = products[indexPath.item]
         let selectedItemVC = SelectedItemViewController()
+        selectedItemVC.modalPresentationStyle = .fullScreen
         selectedItemVC.delegate = selectedProduct
-        navigationController?.pushViewController(selectedItemVC, animated: true)
+        navigationController?.present(selectedItemVC, animated: false)
     }
 }
 

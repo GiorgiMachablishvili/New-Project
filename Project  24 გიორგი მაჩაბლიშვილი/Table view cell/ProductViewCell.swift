@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import SnapKit
 
 class ProductViewCell: UITableViewCell {
     
     static let identifier = "ProductViewCell"
     
+    //MARK: -UI components
     private let separatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hexString: "F4F5F9")
@@ -21,7 +23,7 @@ class ProductViewCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-        
+    
     private lazy var itemImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.contentMode = .scaleAspectFit
@@ -77,19 +79,20 @@ class ProductViewCell: UITableViewCell {
         return button
     }()
     
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-            super.init(style: style, reuseIdentifier: reuseIdentifier)
-            setup()
-            setupConfiguration()
-        }
-        
-        required init?(coder: NSCoder) {
-            super.init(coder: coder)
-            setup()
-            setupConfiguration()
-        }
     
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setup()
+        setupConfiguration()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+        setupConfiguration()
+    }
+    
+    //MARK: setup ui components
     func setup() {
         contentView.addSubview(separatorView)
         contentView.addSubview(backImageView)
@@ -102,90 +105,72 @@ class ProductViewCell: UITableViewCell {
         contentView.addSubview(minusButton)
     }
     
+    //MARK: setup constraints
     func setupConfiguration() {
-//        contentView.translatesAutoresizingMaskIntoConstraints = false
-        separatorView.translatesAutoresizingMaskIntoConstraints = false
-        backImageView.translatesAutoresizingMaskIntoConstraints = false
-        itemImageView.translatesAutoresizingMaskIntoConstraints = false
-        priceLabel.translatesAutoresizingMaskIntoConstraints = false
-        itemNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        itemWeightLabel.translatesAutoresizingMaskIntoConstraints = false
-        plusButton.translatesAutoresizingMaskIntoConstraints = false
-        itemCountLabel.translatesAutoresizingMaskIntoConstraints = false
-        minusButton.translatesAutoresizingMaskIntoConstraints = false
+        separatorView.snp.remakeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(14)
+        }
         
-        NSLayoutConstraint.activate([
-            separatorView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            separatorView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            separatorView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            separatorView.heightAnchor.constraint(equalToConstant: 14)
-        ])
+        backImageView.snp.remakeConstraints { make in
+            make.top.equalTo(contentView.snp.top).offset(14.18)
+            make.leading.equalTo(contentView.snp.leading).offset(15)
+            make.bottom.equalTo(contentView.snp.bottom).offset(-14)
+            make.width.equalTo(64)
+        }
         
-//        NSLayoutConstraint.activate([
-//            contentView.heightAnchor.constraint(equalToConstant: 100),
-//            contentView.widthAnchor.constraint(equalToConstant: 380)
-//        ])
+        itemImageView.snp.remakeConstraints { make in
+            make.top.equalTo(backImageView.snp.top).offset(16)
+            make.leading.equalTo(backImageView.snp.leading).offset(4)
+            make.trailing.equalTo(backImageView.snp.trailing).offset(-5)
+            make.bottom.equalTo(backImageView.snp.bottom).offset(7.8)
+        }
         
-        NSLayoutConstraint.activate([
-            backImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 14.18),
-            backImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 15),
-            backImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -14),
-            backImageView.widthAnchor.constraint(equalToConstant: 64)
-        ])
+        priceLabel.snp.remakeConstraints { make in
+            make.top.equalTo(contentView.snp.top).offset(22)
+            make.leading.equalTo(itemImageView.snp.trailing).offset(22)
+            make.height.equalTo(18)
+        }
         
-        NSLayoutConstraint.activate([
-            itemImageView.topAnchor.constraint(equalTo: backImageView.topAnchor, constant: 15.82),
-            itemImageView.leadingAnchor.constraint(equalTo: backImageView.leadingAnchor,constant: 4),
-            itemImageView.trailingAnchor.constraint(equalTo: backImageView.trailingAnchor, constant: -5),
-            itemImageView.bottomAnchor.constraint(equalTo: backImageView.bottomAnchor, constant: 7.82)
-        ])
+        itemNameLabel.snp.remakeConstraints { make in
+            make.top.equalTo(priceLabel.snp.bottom)
+            make.leading.equalTo(itemImageView.snp.trailing).offset(22)
+            make.height.equalTo(23)
+        }
         
-        NSLayoutConstraint.activate([
-            priceLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 22),
-            priceLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor,constant: 22),
-            priceLabel.heightAnchor.constraint(equalToConstant: 18)
-        ])
+        itemWeightLabel.snp.remakeConstraints { make in
+            make.top.equalTo(itemNameLabel.snp.bottom)
+            make.leading.equalTo(itemImageView.snp.trailing).offset(22)
+            make.height.equalTo(18)
+        }
         
-        NSLayoutConstraint.activate([
-            itemNameLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor),
-            itemNameLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor,constant: 22),
-            itemNameLabel.heightAnchor.constraint(equalToConstant: 23)
-        ])
+        plusButton.snp.remakeConstraints { make in
+            make.top.equalTo(contentView.snp.top).offset(14)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-19)
+            make.height.equalTo(11.85)
+            make.width.equalTo(12.83)
+        }
         
-        NSLayoutConstraint.activate([
-            itemWeightLabel.topAnchor.constraint(equalTo: itemNameLabel.bottomAnchor),
-            itemWeightLabel.leadingAnchor.constraint(equalTo: itemImageView.trailingAnchor,constant: 22),
-            itemWeightLabel.heightAnchor.constraint(equalToConstant: 18)
-        ])
+        itemCountLabel.snp.remakeConstraints { make in
+            make.top.equalTo(plusButton.snp.bottom).offset(14)
+            make.centerX.equalTo(plusButton.snp.centerX)
+            make.height.equalTo(23)
+            make.width.equalTo(10)
+        }
         
-        NSLayoutConstraint.activate([
-            plusButton.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 16),
-            plusButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -19.17),
-            plusButton.widthAnchor.constraint(equalToConstant: 12.83),
-            plusButton.heightAnchor.constraint(equalToConstant: 11.85)
-        ])
-        
-        NSLayoutConstraint.activate([
-            itemCountLabel.topAnchor.constraint(equalTo: plusButton.bottomAnchor,constant: 16.15),
-            itemCountLabel.centerXAnchor.constraint(equalTo: plusButton.centerXAnchor),
-            itemCountLabel.heightAnchor.constraint(equalToConstant: 23),
-            itemCountLabel.widthAnchor.constraint(equalToConstant: 10)
-        ])
-        
-        NSLayoutConstraint.activate([
-            minusButton.topAnchor.constraint(equalTo: itemCountLabel.bottomAnchor,constant: 16),
-            minusButton.centerXAnchor.constraint(equalTo: plusButton.centerXAnchor),
-            minusButton.heightAnchor.constraint(equalToConstant: 12.83),
-//            minusButton.widthAnchor.constraint(equalToConstant: 11.85)
-        ])
+        minusButton.snp.remakeConstraints { make in
+            make.centerX.equalTo(plusButton.snp.centerX)
+            make.bottom.equalTo(contentView.snp.bottom).offset(-16)
+            make.width.equalTo(12.8)
+        }
     }
+    
     func configure(with product: ProductList) {
         backImageView.image = product.backImageName
         itemImageView.image = product.imageName
         priceLabel.text = "Price: \(product.price)"
         itemNameLabel.text = product.name
         itemWeightLabel.text = "Quantity: \(product.quantity)"
-        
     }
 }
 

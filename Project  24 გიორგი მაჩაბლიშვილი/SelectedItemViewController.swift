@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class SelectedItemViewController: UIViewController {
     
@@ -37,6 +38,14 @@ class SelectedItemViewController: UIViewController {
         label.font = .poppinsSemiBold(size: 12)
         label.textAlignment = .left
         return label
+    }()
+    
+    private lazy var heart2ImageView: UIImageView = {
+        let imageView = UIImageView(frame: .zero)
+        imageView.image = UIImage(named: "heart 2")
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        return imageView
     }()
     
     private lazy var itemNameLabel: UILabel = {
@@ -107,22 +116,22 @@ class SelectedItemViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
+        //        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.isHidden = false
+        //        self.tabBarController?.tabBar.isHidden = false
     }
     
     //MARK: go back page
     @objc func goBackPage() {
-        navigationController?.popViewController(animated: true)
+        navigationController?.dismiss(animated: true)
     }
     
     @objc func goCheckPage() {
         let checkPageVC = CheckoutViewController()
-        navigationController?.pushViewController(checkPageVC, animated: true)
+        navigationController?.present(checkPageVC, animated: false)
     }
     
     //MARK: ui configuration
@@ -141,6 +150,7 @@ class SelectedItemViewController: UIViewController {
         view.addSubview(imageView)
         view.addSubview(bottomView)
         bottomView.addSubview(priceLabel)
+        bottomView.addSubview(heart2ImageView)
         bottomView.addSubview(itemNameLabel)
         bottomView.addSubview(itemWeightLabel)
         bottomView.addSubview(ratingImageView)
@@ -151,83 +161,79 @@ class SelectedItemViewController: UIViewController {
     
     //MARK: setup ui components constraints
     func setupConstraint() {
-        backButton.translatesAutoresizingMaskIntoConstraints = false
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        bottomView.translatesAutoresizingMaskIntoConstraints = false
-        priceLabel.translatesAutoresizingMaskIntoConstraints = false
-        itemNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        itemWeightLabel.translatesAutoresizingMaskIntoConstraints = false
-        ratingImageView.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        qualityImageView.translatesAutoresizingMaskIntoConstraints = false
-        addCartButton.translatesAutoresizingMaskIntoConstraints = false
+        
         
         //MARK: layout constraints
-        NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 68),
-            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 17),
-            backButton.widthAnchor.constraint(equalToConstant: 23),
-            backButton.heightAnchor.constraint(equalToConstant: 16)
-        ])
+        backButton.snp.remakeConstraints { make in
+            make.top.equalTo(view.snp.top).offset(68)
+            make.leading.equalTo(view.snp.leading).offset(17)
+            make.width.equalTo(23)
+            make.height.equalTo(16)
+        }
         
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 101),
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 44),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -46),
-            imageView.heightAnchor.constraint(equalToConstant: 324)
-        ])
+        imageView.snp.remakeConstraints { make in
+            make.top.equalTo(view.snp.top).offset(101)
+            make.leading.equalTo(view.snp.leading).offset(44)
+            make.trailing.equalTo(view.snp.trailing).offset(-46)
+            make.height.equalTo(324)
+        }
         
-        NSLayoutConstraint.activate([
-            bottomView.topAnchor.constraint(equalTo: view.topAnchor, constant: 458),
-            bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            bottomView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
-        ])
+        bottomView.snp.remakeConstraints { make in
+            make.top.equalTo(view.snp.top).offset(438)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
         
-        NSLayoutConstraint.activate([
-            priceLabel.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 26),
-            priceLabel.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor,constant: 16),
-            priceLabel.heightAnchor.constraint(equalToConstant: 27)
-        ])
+        priceLabel.snp.remakeConstraints { make in
+            make.top.equalTo(bottomView.snp.top).offset(26)
+            make.leading.equalTo(bottomView.snp.leading).offset(16)
+            make.height.equalTo(27)
+        }
         
-        NSLayoutConstraint.activate([
-            itemNameLabel.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 0),
-            itemNameLabel.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor,constant: 16),
-            itemNameLabel.heightAnchor.constraint(equalToConstant: 30)
-        ])
+        heart2ImageView.snp.remakeConstraints { make in
+            make.top.equalTo(bottomView.snp.top).offset(33)
+            make.trailing.equalTo(bottomView.snp.trailing).offset(-21)
+            make.height.equalTo(18)
+            make.width.equalTo(20)
+        }
         
-        NSLayoutConstraint.activate([
-            itemWeightLabel.topAnchor.constraint(equalTo: itemNameLabel.bottomAnchor, constant: 3),
-            itemWeightLabel.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor,constant: 16),
-            itemWeightLabel.heightAnchor.constraint(equalToConstant: 18)
-        ])
+        itemNameLabel.snp.remakeConstraints { make in
+            make.top.equalTo(priceLabel.snp.bottom)
+            make.leading.equalTo(bottomView.snp.leading).offset(16)
+            make.height.equalTo(30)
+        }
         
-        NSLayoutConstraint.activate([
-            ratingImageView.topAnchor.constraint(equalTo: itemWeightLabel.bottomAnchor, constant: 9),
-            ratingImageView.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor,constant: 17),
-            ratingImageView.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -150),
-            ratingImageView.heightAnchor.constraint(equalToConstant: 18)
-        ])
+        itemWeightLabel.snp.remakeConstraints { make in
+            make.top.equalTo(itemNameLabel.snp.bottom).offset(3)
+            make.leading.equalTo(bottomView.snp.leading).offset(16)
+            make.height.equalTo(18)
+        }
         
-        NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(equalTo: ratingImageView.bottomAnchor, constant: 16),
-            descriptionLabel.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor,constant: 17),
-            descriptionLabel.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -24),
-            descriptionLabel.heightAnchor.constraint(equalToConstant: 124)
-        ])
+        ratingImageView.snp.remakeConstraints { make in
+            make.top.equalTo(itemWeightLabel.snp.bottom).offset(9)
+            make.leading.equalTo(bottomView.snp.leading).offset(17)
+            make.trailing.equalTo(bottomView.snp.trailing).offset(-150)
+            make.height.equalTo(18)
+        }
         
-        NSLayoutConstraint.activate([
-            qualityImageView.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor,constant: 17),
-            qualityImageView.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -17),
-            qualityImageView.bottomAnchor.constraint(equalTo: addCartButton.topAnchor, constant: -13),
-            qualityImageView.heightAnchor.constraint(equalToConstant: 50)
-        ])
+        descriptionLabel.snp.remakeConstraints { make in
+            make.top.equalTo(ratingImageView.snp.bottom).offset(14)
+            make.leading.equalTo(bottomView.snp.leading).offset(17)
+            make.trailing.equalTo(bottomView.snp.trailing).offset(-24)
+            make.height.equalTo(124)
+        }
         
-        NSLayoutConstraint.activate([
-            addCartButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 50),
-            addCartButton.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor,constant: 17),
-            addCartButton.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -17),
-            addCartButton.heightAnchor.constraint(equalToConstant: 60)
-        ])
+        qualityImageView.snp.remakeConstraints { make in
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(8)
+            make.leading.equalTo(bottomView.snp.leading).offset(17)
+            make.trailing.equalTo(addCartButton.snp.trailing).offset(-17)
+            make.height.equalTo(50)
+        }
+        
+        addCartButton.snp.remakeConstraints { make in
+            make.top.equalTo(qualityImageView.snp.bottom).offset(13)
+            make.leading.equalTo(bottomView.snp.leading).offset(17)
+            make.trailing.equalTo(bottomView.snp.trailing).offset(-17)
+            make.height.equalTo(60)
+        }
     }
 }

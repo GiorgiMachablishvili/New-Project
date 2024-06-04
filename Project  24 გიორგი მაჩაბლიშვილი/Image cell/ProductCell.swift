@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import SnapKit
 
 class ProductCell: UICollectionViewCell {
     
     static let identifier = "ProductCell"
     
+    //MARK: -UI components
     private lazy var backImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -69,7 +71,6 @@ class ProductCell: UICollectionViewCell {
     
     private lazy var bagImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
-//        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -100,6 +101,7 @@ class ProductCell: UICollectionViewCell {
         
     }
     
+    //MARK: setup ui components
     func setup() {
         contentView.addSubview(backImageView)
         contentView.addSubview(heartImageView)
@@ -114,93 +116,81 @@ class ProductCell: UICollectionViewCell {
         stackView.addSubview(addCartButtonItem)
     }
     
+    //MARK: setup constraints
     func setupConstraints() {
-        backImageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        heartImageView.translatesAutoresizingMaskIntoConstraints = false
-        saleImage.translatesAutoresizingMaskIntoConstraints = false
-        priceLabel.translatesAutoresizingMaskIntoConstraints = false
-        itemNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        itemWeightLabel.translatesAutoresizingMaskIntoConstraints = false
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        line.translatesAutoresizingMaskIntoConstraints = false
-        bagImageView.translatesAutoresizingMaskIntoConstraints = false
-        addCartButtonItem.translatesAutoresizingMaskIntoConstraints = false
+        backImageView.snp.remakeConstraints { make in
+            make.top.equalTo(contentView.snp.top).offset(21)
+            make.leading.equalTo(contentView.snp.leading).offset(41)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-48)
+            make.bottom.equalTo(contentView.snp.bottom).offset(-119)
+        }
         
-        NSLayoutConstraint.activate([
-            backImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 21),
-            backImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 42),
-            backImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -48),
-            backImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -119)
-        ])
+        imageView.snp.remakeConstraints { make in
+            make.top.equalTo(backImageView.snp.top).offset(22)
+            make.leading.equalTo(backImageView.snp.leading).offset(-7)
+            make.trailing.equalTo(backImageView.snp.trailing)
+            make.bottom.equalTo(backImageView.snp.bottom).offset(10)
+        }
         
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: backImageView.topAnchor, constant: 22),
-            imageView.leadingAnchor.constraint(equalTo: backImageView.leadingAnchor, constant: -7),
-            imageView.trailingAnchor.constraint(equalTo: backImageView.trailingAnchor, constant: 0),
-            imageView.bottomAnchor.constraint(equalTo: backImageView.bottomAnchor, constant: 10)
-        ])
+        heartImageView.snp.remakeConstraints { make in
+            make.top.equalTo(contentView.snp.top).offset(9)
+            make.trailing.equalTo(contentView.snp.trailing).offset(-8)
+            make.height.equalTo(16)
+            make.width.equalTo(18)
+        }
         
-        NSLayoutConstraint.activate([
-            heartImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 9),
-            heartImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            heartImageView.heightAnchor.constraint(equalToConstant: 16),
-            heartImageView.widthAnchor.constraint(equalToConstant: 18)
-        ])
+        saleImage.snp.remakeConstraints { make in
+            make.top.equalTo(contentView.snp.top)
+            make.leading.equalTo(contentView.snp.leading)
+            make.height.equalTo(18)
+            make.width.equalTo(38)
+        }
         
-        NSLayoutConstraint.activate([
-            saleImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            saleImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            saleImage.heightAnchor.constraint(equalToConstant: 18),
-            saleImage.widthAnchor.constraint(equalToConstant: 38)
-        ])
+        priceLabel.snp.remakeConstraints { make in
+            make.top.equalTo(imageView.snp.bottom).offset(3)
+            make.centerX.equalTo(imageView.snp.centerX)
+            make.height.equalTo(18)
+        }
         
-        NSLayoutConstraint.activate([
-            priceLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 3),
-            priceLabel.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
-            priceLabel.heightAnchor.constraint(equalToConstant: 18)
-        ])
+        itemNameLabel.snp.remakeConstraints { make in
+            make.top.equalTo(imageView.snp.bottom).offset(20)
+            make.centerX.equalTo(imageView.snp.centerX)
+            make.height.equalTo(23)
+        }
         
-        NSLayoutConstraint.activate([
-            itemNameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
-            itemNameLabel.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
-            itemNameLabel.heightAnchor.constraint(equalToConstant: 23)
-        ])
+        itemWeightLabel.snp.remakeConstraints { make in
+            make.top.equalTo(itemNameLabel.snp.bottom).offset(1)
+            make.centerX.equalTo(imageView.snp.centerX)
+            make.height.equalTo(18)
+        }
         
-        NSLayoutConstraint.activate([
-            itemWeightLabel.topAnchor.constraint(equalTo: itemNameLabel.bottomAnchor, constant: 1),
-            itemWeightLabel.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
-            itemWeightLabel.heightAnchor.constraint(equalToConstant: 18)
-        ])
+        line.snp.remakeConstraints { make in
+            make.top.equalTo(itemWeightLabel.snp.bottom).offset(11)
+            make.centerX.equalTo(itemWeightLabel.snp.centerX)
+            make.width.equalTo(171)
+            make.height.equalTo(1)
+        }
         
-        NSLayoutConstraint.activate([
-            line.topAnchor.constraint(equalTo: itemWeightLabel.bottomAnchor, constant: 11),
-            line.centerXAnchor.constraint(equalTo: itemWeightLabel.centerXAnchor),
-            line.widthAnchor.constraint(equalToConstant: 171),
-            line.heightAnchor.constraint(equalToConstant: 1)
-        ])
+        stackView.snp.remakeConstraints { make in
+            make.centerX.equalTo(itemNameLabel.snp.centerX)
+            make.top.equalTo(line.snp.bottom).offset(12)
+            make.width.equalTo(90)
+            make.height.equalTo(18)
+        }
         
-        NSLayoutConstraint.activate([
-            stackView.centerXAnchor.constraint(equalTo: itemNameLabel.centerXAnchor),
-            stackView.topAnchor.constraint(equalTo: line.bottomAnchor, constant: 12),
-            stackView.widthAnchor.constraint(equalToConstant: 90),
-            stackView.heightAnchor.constraint(equalToConstant: 18)
-        ])
+        bagImageView.snp.remakeConstraints { make in
+            make.centerX.equalTo(stackView.snp.centerX)
+            make.width.equalTo(13)
+            make.height.equalTo(15)
+        }
         
-        NSLayoutConstraint.activate([
-            bagImageView.centerYAnchor.constraint(equalTo: stackView.centerYAnchor),
-            bagImageView.widthAnchor.constraint(equalToConstant: 13),
-            bagImageView.heightAnchor.constraint(equalToConstant: 15)
-        ])
-        
-        NSLayoutConstraint.activate([
-            addCartButtonItem.leadingAnchor.constraint(equalTo: bagImageView.trailingAnchor, constant: 9),
-            addCartButtonItem.centerYAnchor.constraint(equalTo: bagImageView.centerYAnchor),
-            addCartButtonItem.widthAnchor.constraint(equalToConstant: 68),
-            addCartButtonItem.heightAnchor.constraint(equalToConstant: 18)
-        ])
+        addCartButtonItem.snp.remakeConstraints { make in
+            make.leading.equalTo(bagImageView.snp.trailing).offset(9)
+            make.centerY.equalTo(bagImageView.snp.centerY)
+            make.width.equalTo(68)
+            make.height.equalTo(18)
+        }
     }
-    
     func configure(with product: ProductList) {
         backImageView.image = product.backImageName
         imageView.image = product.imageName
@@ -211,5 +201,4 @@ class ProductCell: UICollectionViewCell {
         itemWeightLabel.text = product.quantity
         bagImageView.image = product.bagImage
     }
-    
 }
