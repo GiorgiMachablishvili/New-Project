@@ -81,15 +81,15 @@ class ChooseItemsViewController: UIViewController {
         
         
         topLabel.snp.remakeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(45)
-            make.leading.equalTo(view.snp.leading).offset(17)
-            make.height.equalTo(27)
+            make.top.equalTo(view.snp.top).offset(view.frame.height * 0.05)
+            make.leading.equalTo(view.snp.leading).offset(view.frame.width * 0.041)
+            make.height.equalTo(view.frame.height * 0.023)
         }
         
         collectionView.snp.remakeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(93)
-            make.leading.equalTo(view.snp.leading).offset(17)
-            make.trailing.equalTo(view.snp.trailing).offset(-16)
+            make.top.equalTo(view.snp.top).offset(view.frame.height * 0.103)
+            make.leading.equalTo(view.snp.leading).offset(view.frame.width * 0.041)
+            make.trailing.equalTo(view.snp.trailing).offset(-(view.frame.width * 0.0386))
             make.bottom.equalTo(view.snp.bottom)
         }
     }

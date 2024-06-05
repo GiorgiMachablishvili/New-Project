@@ -190,106 +190,98 @@ class WelcomeViewController: UIViewController {
         //MARK: layout constraints
         imageView.snp.remakeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(view.snp.bottom).offset(-385)
+            make.bottom.equalTo(view.snp.top).offset(view.frame.height * 0.56)
         }
         
         imageViewLabel.snp.remakeConstraints { make in
-            make.top.equalTo(imageView.snp.top).offset(63)
+            make.top.equalTo(imageView.snp.top).offset(view.frame.height * 0.07)
             make.centerX.equalTo(view.snp.centerX)
-            make.width.equalTo(imageViewLabel.snp.height).offset(27)
         }
-        
+
         customView.snp.remakeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(446)
+            make.top.equalTo(view.snp.top).offset(view.frame.height * 0.5)
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(view.snp.bottom).offset(3)
+            make.bottom.equalTo(view.snp.bottom).offset(view.frame.height * 0.0033)
         }
-        
+
         titleLabel.snp.remakeConstraints { make in
-            make.top.equalTo(customView.snp.top).offset(30)
-            make.leading.equalTo(customView.snp.leading).offset(16)
-            make.height.equalTo(38)
+            make.top.equalTo(customView.snp.top).offset(view.frame.height * 0.05)
+            make.leading.equalTo(customView.snp.leading).offset(view.frame.width * 0.03)
         }
-        
+
         paragraphLabel.snp.remakeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(2)
-            make.leading.equalTo(customView.snp.leading).offset(16)
-            make.height.equalTo(23)
+            make.top.equalTo(titleLabel.snp.bottom).offset(view.frame.height * 0.0022)
+            make.leading.equalTo(customView.snp.leading).offset(view.frame.width * 0.03)
         }
-        
+
         textField1.snp.remakeConstraints { make in
-            make.top.equalTo(customView.snp.top).offset(119)
-            make.leading.equalTo(customView.snp.leading).offset(17)
-            make.trailing.equalTo(customView.snp.trailing).offset(-17)
-            make.height.equalTo(60)
+            make.top.equalTo(customView.snp.top).offset(view.frame.height * 0.16)
+            make.leading.trailing.equalToSuperview().inset(view.frame.width * 0.04)
+            make.height.equalTo(view.frame.height * 0.066)
         }
         
         textField1Image.snp.remakeConstraints { make in
-            make.top.equalTo(textField1.snp.top).offset(21)
-            make.leading.equalTo(textField1.snp.leading).offset(28)
-            make.bottom.equalTo(textField1.snp.bottom).offset(-21.5)
-            make.width.equalTo(23)
+            make.leading.equalTo(textField1.snp.leading).offset(view.frame.width * 0.067)
+            make.centerY.equalTo(textField1.snp.centerY)
+            make.height.equalTo(view.frame.width * 0.042)
+            make.width.equalTo(view.frame.width * 0.055)
         }
-        
+
         textField2.snp.remakeConstraints { make in
-            make.top.equalTo(textField1.snp.bottom).offset(3)
-            make.leading.equalTo(customView.snp.leading).offset(17)
-            make.trailing.equalTo(customView.snp.trailing).offset(-17)
-            make.height.equalTo(60)
+            make.top.equalTo(textField1.snp.bottom).offset(view.frame.height * 0.0033)
+            make.leading.trailing.equalToSuperview().inset(view.frame.width * 0.04)
+            make.height.equalTo(view.frame.height * 0.066)
         }
         
         textField2Image1.snp.remakeConstraints { make in
-            make.top.equalTo(textField2.snp.top).offset(18)
-            make.leading.equalTo(textField2.snp.leading).offset(28)
-            make.bottom.equalTo(textField2.snp.bottom).offset(-19)
-            make.width.equalTo(17.25)
+            make.leading.equalTo(textField2.snp.leading).offset(view.frame.width * 0.067)
+            make.centerY.equalTo(textField2.snp.centerY)
+            make.height.equalTo(view.frame.height * 0.025)
+            make.width.equalTo(view.frame.width * 0.042)
         }
         
         textField2Image2.snp.remakeConstraints { make in
-            make.top.equalTo(textField2.snp.top).offset(22)
-            make.trailing.equalTo(textField2.snp.trailing).offset(-28.5)
-            make.bottom.equalTo(textField2.snp.bottom).offset(-21.12)
-            make.width.equalTo(26.5)
+            make.trailing.equalTo(textField2.snp.trailing).offset(-(view.frame.width * 0.044))
+            make.centerY.equalTo(textField2.snp.centerY)
+            make.height.equalTo(view.frame.height * 0.0187)
+            make.width.equalTo(view.frame.width * 0.064)
         }
         
         switcherLabel.snp.remakeConstraints { make in
-            make.top.equalTo(textField2.snp.bottom).offset(25)
-            make.leading.equalTo(customView.snp.leading).offset(26.57)
-            make.bottom.equalTo(primaryButton.snp.top).offset(-20)
-            make.width.equalTo(29)
+            make.top.equalTo(textField2.snp.bottom).offset(view.frame.height * 0.027)
+            make.leading.equalTo(customView.snp.leading).offset(view.frame.width * 0.064)
+            make.bottom.equalTo(primaryButton.snp.top).offset(-(view.frame.height * 0.022))
+            make.width.equalTo(view.frame.width * 0.07)
         }
         
         rememberLabel.snp.remakeConstraints { make in
-            make.top.equalTo(textField2.snp.bottom).offset(21)
-            make.leading.equalTo(switcherLabel.snp.trailing).offset(9.5)
-            make.bottom.equalTo(primaryButton.snp.top).offset(-17)
+            make.centerY.equalTo(switcherLabel.snp.centerY)
+            make.leading.equalTo(switcherLabel.snp.trailing).offset(view.frame.width * 0.022)
         }
-        
+
         forgotPasswordLabel.snp.remakeConstraints { make in
-            make.top.equalTo(textField2.snp.bottom).offset(21)
-            make.trailing.equalTo(customView.snp.trailing).offset(-26)
-            make.bottom.equalTo(primaryButton.snp.top).offset(-17)
-            make.width.equalTo(134)
+            make.centerY.equalTo(switcherLabel.snp.centerY)
+            make.trailing.equalTo(customView.snp.trailing).offset(-(view.frame.width * 0.062))
+            make.width.equalTo(view.frame.width * 0.323)
         }
         
         primaryButton.snp.remakeConstraints { make in
-            make.top.equalTo(textField2.snp.bottom).offset(61)
-            make.leading.equalTo(customView.snp.leading).offset(17)
-            make.trailing.equalTo(customView.snp.trailing).offset(-17)
-            make.height.equalTo(60)
+            make.top.equalTo(textField2.snp.bottom).offset(view.frame.height * 0.068)
+            make.leading.trailing.equalToSuperview().inset(view.frame.width * 0.04)
+            make.height.equalTo(view.frame.height * 0.066)
         }
-        
+
         accountLabel.snp.remakeConstraints { make in
             make.top.equalTo(primaryButton.snp.bottom)
-            make.leading.equalTo(customView.snp.leading).offset(74)
-            make.height.equalTo(23)
+            make.leading.equalTo(customView.snp.leading).offset(view.frame.width * 0.178)
+            make.height.equalTo(view.frame.height * 0.025)
         }
         
         signupButton.snp.remakeConstraints { make in
             make.top.equalTo(primaryButton.snp.bottom)
             make.leading.equalTo(accountLabel.snp.trailing)
-            make.trailing.equalTo(customView.snp.trailing).offset(-60)
-            make.height.equalTo(23)
+            make.trailing.equalTo(customView.snp.trailing).offset(-(view.frame.width * 0.13))
+            make.height.equalTo(view.frame.height * 0.025)
         }
     }
 }

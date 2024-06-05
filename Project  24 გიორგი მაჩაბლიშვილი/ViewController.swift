@@ -92,35 +92,30 @@ class ViewController: UIViewController {
         //MARK: layout constraints
         imageView.snp.remakeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(619)
+            make.height.equalTo(view.frame.height * 0.68)
         }
         
         customView.snp.remakeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(471)
-            make.leading.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(view.frame.height * 0.47)
         }
         
         titleLabel.snp.remakeConstraints { make in
-            make.top.equalTo(customView.snp.top).offset(46.26)
-            make.leading.equalTo(customView.snp.leading).offset(47)
-            make.trailing.equalTo(customView.snp.trailing).offset(-47)
-            make.height.equalTo(90)
+            make.top.equalTo(customView.snp.top).offset(view.frame.height * 0.071)
+            make.leading.trailing.equalToSuperview().inset(view.frame.width * 0.11)
+            make.height.equalTo(view.frame.height * 0.1)
         }
         
         paragraphLabel.snp.remakeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(17)
-            make.leading.equalTo(customView.snp.leading).offset(47)
-            make.trailing.equalTo(customView.snp.trailing).offset(-47)
-            make.height.equalTo(47)
+            make.top.equalTo(titleLabel.snp.bottom).offset(view.frame.height * 0.0189)
+            make.trailing.leading.equalToSuperview().inset(view.frame.width * 0.114)
+            make.height.equalTo(view.frame.height * 0.052)
         }
         
         primaryButton.snp.remakeConstraints { make in
-            make.top.equalTo(paragraphLabel.snp.bottom).offset(91)
-            make.leading.equalTo(customView.snp.leading).offset(17)
-            make.trailing.equalTo(customView.snp.trailing).offset(-17)
-            make.height.equalTo(60)
+            make.bottom.equalTo(paragraphLabel.snp.bottom).offset(view.frame.height * 0.17)
+            make.leading.trailing.equalToSuperview().inset(view.frame.width * 0.041)
+            make.height.equalTo(view.frame.height * 0.066)
         }
     }
 }

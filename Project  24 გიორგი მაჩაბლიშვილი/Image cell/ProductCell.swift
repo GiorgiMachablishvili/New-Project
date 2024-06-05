@@ -125,6 +125,13 @@ class ProductCell: UICollectionViewCell {
             make.bottom.equalTo(contentView.snp.bottom).offset(-119)
         }
         
+//        backImageView.snp.remakeConstraints { make in
+//            make.top.equalTo(contentView.snp.top).offset(contentView.frame.height * 0.023)
+//            make.leading.equalTo(contentView.snp.leading).offset(contentView.frame.width * 0.01)
+//            make.trailing.equalTo(contentView.snp.trailing).offset(-(contentView.frame.width * 0.053))
+//            make.bottom.equalTo(contentView.snp.bottom).offset(-(contentView.frame.height * 0.132))
+//        }
+        
         imageView.snp.remakeConstraints { make in
             make.top.equalTo(backImageView.snp.top).offset(22)
             make.leading.equalTo(backImageView.snp.leading).offset(-7)
@@ -179,14 +186,12 @@ class ProductCell: UICollectionViewCell {
         }
         
         bagImageView.snp.remakeConstraints { make in
-            make.centerX.equalTo(stackView.snp.centerX)
             make.width.equalTo(13)
             make.height.equalTo(15)
         }
         
         addCartButtonItem.snp.remakeConstraints { make in
             make.leading.equalTo(bagImageView.snp.trailing).offset(9)
-            make.centerY.equalTo(bagImageView.snp.centerY)
             make.width.equalTo(68)
             make.height.equalTo(18)
         }
