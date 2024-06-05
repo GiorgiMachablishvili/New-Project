@@ -166,75 +166,73 @@ class SelectedItemViewController: UIViewController {
         
         //MARK: layout constraints
         backButton.snp.remakeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(68)
-            make.leading.equalTo(view.snp.leading).offset(17)
-            make.width.equalTo(23)
-            make.height.equalTo(16)
+            make.top.equalTo(view.snp.top).offset(view.frame.height * 0.0076)
+            make.leading.equalTo(view.snp.leading).offset(view.frame.width * 0.041)
+            make.width.equalTo(view.frame.width * 0.055)
+            make.height.equalTo(view.frame.height * 0.176)
         }
         
         imageView.snp.remakeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(101)
-            make.leading.equalTo(view.snp.leading).offset(44)
-            make.trailing.equalTo(view.snp.trailing).offset(-46)
-            make.height.equalTo(324)
+            make.top.equalTo(view.snp.top).offset(view.frame.height * 0.112)
+            make.leading.equalTo(view.snp.leading).offset(view.frame.width * 0.106)
+            make.trailing.equalTo(view.snp.trailing).offset(-(view.frame.width * 0.111))
+            make.height.equalTo(view.frame.height * 0.36)
         }
         
         bottomView.snp.remakeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(438)
+            make.top.equalTo(view.snp.top).offset(view.frame.height * 0.486)
             make.leading.trailing.bottom.equalToSuperview()
         }
         
         priceLabel.snp.remakeConstraints { make in
-            make.top.equalTo(bottomView.snp.top).offset(26)
-            make.leading.equalTo(bottomView.snp.leading).offset(16)
-            make.height.equalTo(27)
+            make.top.equalTo(bottomView.snp.top).offset(view.frame.height * 0.0288)
+            make.leading.equalTo(bottomView.snp.leading).offset(view.frame.width * 0.038)
+            make.height.equalTo(view.frame.height * 0.0299)
         }
         
         heart2ImageView.snp.remakeConstraints { make in
-            make.top.equalTo(bottomView.snp.top).offset(33)
-            make.trailing.equalTo(bottomView.snp.trailing).offset(-21)
-            make.height.equalTo(18)
-            make.width.equalTo(20)
+            make.top.equalTo(bottomView.snp.top).offset(view.frame.height * 0.036)
+            make.trailing.equalTo(bottomView.snp.trailing).offset(-(view.frame.width * 0.05))
+            make.height.equalTo(view.frame.height * 0.02)
+            make.width.equalTo(view.frame.width * 0.048)
         }
         
         itemNameLabel.snp.remakeConstraints { make in
             make.top.equalTo(priceLabel.snp.bottom)
-            make.leading.equalTo(bottomView.snp.leading).offset(16)
-            make.height.equalTo(30)
+            make.leading.equalTo(bottomView.snp.leading).offset(view.frame.width * 0.038)
+            make.height.equalTo(view.frame.height * 0.033)
         }
         
         itemWeightLabel.snp.remakeConstraints { make in
-            make.top.equalTo(itemNameLabel.snp.bottom).offset(3)
-            make.leading.equalTo(bottomView.snp.leading).offset(16)
-            make.height.equalTo(18)
+            make.top.equalTo(itemNameLabel.snp.bottom).offset(view.frame.height * 0.0033)
+            make.leading.equalTo(bottomView.snp.leading).offset(view.frame.width * 0.0386)
+            make.height.equalTo(view.frame.height * 0.0199)
         }
         
         ratingImageView.snp.remakeConstraints { make in
-            make.top.equalTo(itemWeightLabel.snp.bottom).offset(9)
-            make.leading.equalTo(bottomView.snp.leading).offset(17)
-            make.trailing.equalTo(bottomView.snp.trailing).offset(-150)
-            make.height.equalTo(18)
+            make.top.equalTo(itemWeightLabel.snp.bottom).offset(view.frame.height * 0.0099)
+            make.leading.equalTo(bottomView.snp.leading).offset(view.frame.width * 0.041)
+            make.trailing.equalTo(bottomView.snp.trailing).offset(-(view.frame.width * 0.362))
+            make.height.equalTo(view.frame.height * 0.0199)
         }
         
         descriptionLabel.snp.remakeConstraints { make in
-            make.top.equalTo(ratingImageView.snp.bottom).offset(14)
-            make.leading.equalTo(bottomView.snp.leading).offset(17)
-            make.trailing.equalTo(bottomView.snp.trailing).offset(-24)
-            make.height.equalTo(124)
+            make.top.equalTo(ratingImageView.snp.bottom).offset(view.frame.height * 0.015)
+            make.leading.equalTo(bottomView.snp.leading).offset(view.frame.width * 0.041)
+            make.trailing.equalTo(bottomView.snp.trailing).offset(-(view.frame.width * 0.058))
+            make.height.equalTo(view.frame.height * 0.137)
         }
         
         qualityImageView.snp.remakeConstraints { make in
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(8)
-            make.leading.equalTo(bottomView.snp.leading).offset(17)
-            make.trailing.equalTo(addCartButton.snp.trailing).offset(-17)
-            make.height.equalTo(50)
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(view.frame.height * 0.0089)
+            make.leading.trailing.equalToSuperview().inset(view.frame.width * 0.041)
+            make.height.equalTo(view.frame.height * 0.055)
         }
         
         addCartButton.snp.remakeConstraints { make in
-            make.top.equalTo(qualityImageView.snp.bottom).offset(13)
-            make.leading.equalTo(bottomView.snp.leading).offset(17)
-            make.trailing.equalTo(bottomView.snp.trailing).offset(-17)
-            make.height.equalTo(60)
+            make.top.equalTo(qualityImageView.snp.bottom).offset(view.frame.height * 0.0144)
+            make.leading.trailing.equalToSuperview().inset(view.frame.width * 0.041)
+            make.height.equalTo(view.frame.height * 0.066)
         }
     }
 }

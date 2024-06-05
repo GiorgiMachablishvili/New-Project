@@ -100,8 +100,8 @@
 		E3D12B8F2C08847200FE2980 /* Project  24 გიორგი მაჩაბლიშვილი */ = {
 			isa = PBXGroup;
 			children = (
-				E3B4651F2C0B0CD900E40724 /* Table view cell */,
 				E3CCB2662C09EB42003F370B /* Image cell */,
+				E3B4651F2C0B0CD900E40724 /* Table view cell */,
 				E3D12BA92C08AB5200FE2980 /* Fonts */,
 				E3D12BA42C0896CF00FE2980 /* Extention */,
 				E3D12B902C08847200FE2980 /* AppDelegate.swift */,

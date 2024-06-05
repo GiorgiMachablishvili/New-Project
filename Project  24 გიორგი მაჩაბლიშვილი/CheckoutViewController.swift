@@ -152,69 +152,67 @@ class CheckoutViewController: UIViewController {
     //MARK: layout constraints
     func setupConstraint() {
         tableView.snp.remakeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(118)
-            make.leading.equalTo(view.snp.leading).offset(17)
-            make.trailing.equalTo(view.snp.trailing).offset(-17)
-            make.bottom.equalTo(view.snp.bottom).offset(-234)
+            make.top.equalTo(view.snp.top).offset(view.frame.height * 0.130)
+            make.leading.trailing.equalToSuperview().inset(view.frame.width * 0.041)
+            make.bottom.equalTo(view.snp.bottom).offset(-(view.frame.height * 0.259))
         }
         
         topView.snp.remakeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(118)
+            make.height.equalTo(view.frame.height * 0.131)
         }
         
         titleLabel.snp.remakeConstraints { make in
-            make.top.equalTo(topView.snp.top).offset(62)
+            make.top.equalTo(topView.snp.top).offset(view.frame.height * 0.0688)
             make.centerX.equalTo(topView.snp.centerX)
-            make.height.equalTo(27)
+            make.height.equalTo(view.frame.height * 0.0299)
         }
         
         bottomView.snp.remakeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(234)
+            make.height.equalTo(view.frame.height * 0.259)
         }
         
         subTotalLabel.snp.remakeConstraints { make in
-            make.top.equalTo(bottomView.snp.top).offset(22)
-            make.leading.equalTo(bottomView.snp.leading).offset(17)
-            make.height.equalTo(18)
+            make.top.equalTo(bottomView.snp.top).offset(view.frame.height * 0.0244)
+            make.leading.equalTo(bottomView.snp.leading).offset(view.frame.width * 0.041)
+            make.height.equalTo(view.frame.height * 0.0199)
         }
         
         subTotalPriceLabel.snp.remakeConstraints { make in
-            make.top.equalTo(bottomView.snp.top).offset(22)
-            make.trailing.equalTo(bottomView.snp.trailing).offset(-17)
-            make.height.equalTo(18)
+            make.top.equalTo(bottomView.snp.top).offset(view.frame.height * 0.0199)
+            make.trailing.equalTo(bottomView.snp.trailing).offset(-(view.frame.width * 0.041))
+            make.height.equalTo(view.frame.height * 0.0199)
         }
         
         shippingLabel.snp.remakeConstraints { make in
-            make.top.equalTo(subTotalLabel.snp.bottom).offset(7)
-            make.leading.equalTo(bottomView.snp.leading).offset(17)
-            make.height.equalTo(18)
+            make.top.equalTo(subTotalLabel.snp.bottom).offset(view.frame.height * 0.0077)
+            make.leading.equalTo(bottomView.snp.leading).offset(view.frame.width * 0.041)
+            make.height.equalTo(view.frame.height * 0.0199)
         }
         
         shippingPriceLabel.snp.remakeConstraints { make in
-            make.top.equalTo(subTotalPriceLabel.snp.bottom).offset(7)
-            make.trailing.equalTo(bottomView.snp.trailing).offset(-17)
-            make.height.equalTo(18)
+            make.top.equalTo(subTotalPriceLabel.snp.bottom).offset(view.frame.height * 0.0077)
+            make.trailing.equalTo(bottomView.snp.trailing).offset(-(view.frame.width * 0.041))
+            make.height.equalTo(view.frame.height * 0.0199)
         }
         
         totalLabel.snp.remakeConstraints { make in
-            make.top.equalTo(shippingLabel.snp.bottom).offset(30)
-            make.leading.equalTo(bottomView.snp.leading).offset(17)
-            make.height.equalTo(27)
+            make.top.equalTo(shippingLabel.snp.bottom).offset(view.frame.height * 0.033)
+            make.leading.equalTo(bottomView.snp.leading).offset(view.frame.width * 0.041)
+            make.height.equalTo(view.frame.height * 0.0299)
         }
         
         totalPriceLabel.snp.remakeConstraints { make in
-            make.top.equalTo(shippingPriceLabel.snp.bottom).offset(30)
-            make.trailing.equalTo(bottomView.snp.trailing).offset(-17)
-            make.height.equalTo(27)
+            make.top.equalTo(shippingPriceLabel.snp.bottom).offset(view.frame.height * 0.033)
+            make.trailing.equalTo(bottomView.snp.trailing).offset(-(view.frame.width * 0.041))
+            make.height.equalTo(view.frame.height * 0.0299)
         }
         
         checkButton.snp.remakeConstraints { make in
-            make.leading.equalTo(bottomView.snp.leading).offset(17)
-            make.trailing.equalTo(bottomView.snp.trailing).offset(-17)
-            make.bottom.equalTo(bottomView.snp.bottom).offset(-36)
-            make.height.equalTo(60)
+            make.leading.trailing.equalToSuperview().inset(view.frame.width * 0.041)
+            make.bottom.equalTo(bottomView.snp.bottom).offset(-(view.frame.height * 0.0399))
+            make.height.equalTo(view.frame.height * 0.066)
         }
     }
 }
