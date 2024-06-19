@@ -127,14 +127,14 @@ class SelectedItemViewController: UIViewController {
     
     //MARK: go back page
     @objc func goBackPage() {
-        navigationController?.dismiss(animated: true)
+        navigationController?.dismiss(animated: true, completion: nil)
     }
     
     @objc func goCheckPage() {
         let checkPageVC = CheckoutViewController()
         navigationController?.present(checkPageVC, animated: false)
     }
-    
+
     //MARK: ui configuration
     func configuration() {
         if let product = delegate {
@@ -162,8 +162,6 @@ class SelectedItemViewController: UIViewController {
     
     //MARK: setup ui components constraints
     func setupConstraint() {
-        
-        
         //MARK: layout constraints
         backButton.snp.remakeConstraints { make in
             make.top.equalTo(view.snp.top).offset(view.frame.height * 0.0076)

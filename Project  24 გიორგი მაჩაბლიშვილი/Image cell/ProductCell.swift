@@ -125,13 +125,6 @@ class ProductCell: UICollectionViewCell {
             make.bottom.equalTo(contentView.snp.bottom).offset(-119)
         }
         
-//        backImageView.snp.remakeConstraints { make in
-//            make.top.equalTo(contentView.snp.top).offset(contentView.frame.height * 0.023)
-//            make.leading.equalTo(contentView.snp.leading).offset(contentView.frame.width * 0.01)
-//            make.trailing.equalTo(contentView.snp.trailing).offset(-(contentView.frame.width * 0.053))
-//            make.bottom.equalTo(contentView.snp.bottom).offset(-(contentView.frame.height * 0.132))
-//        }
-        
         imageView.snp.remakeConstraints { make in
             make.top.equalTo(backImageView.snp.top).offset(22)
             make.leading.equalTo(backImageView.snp.leading).offset(-7)

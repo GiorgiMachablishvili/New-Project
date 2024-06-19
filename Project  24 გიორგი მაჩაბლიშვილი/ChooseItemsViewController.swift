@@ -78,8 +78,6 @@ class ChooseItemsViewController: UIViewController {
     //MARK: setup ui components constraints
     func setupConstraints() {
         //MARK: layout constraints
-        
-        
         topLabel.snp.remakeConstraints { make in
             make.top.equalTo(view.snp.top).offset(view.frame.height * 0.05)
             make.leading.equalTo(view.snp.leading).offset(view.frame.width * 0.041)
